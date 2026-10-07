@@ -855,11 +855,17 @@ window.addEventListener('resize', () => {
   drawWheel();
 });
 
-// Inicialização
-window.addEventListener('DOMContentLoaded', () => {
+// Inicialização robusta para Vite/Vercel
+function initApp() {
   loadData();
   setupCanvasResolution();
   drawWheel();
   renderPrizesList();
   renderHistoryList();
-});
+}
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
